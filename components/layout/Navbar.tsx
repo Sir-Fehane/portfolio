@@ -10,13 +10,13 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({
   name = "Emiliano Aguilar",
-  role = "Full Stack & Systems Engineer",
+  role = "Ingeniero DevOps & Full Stack",
   initials = "EA",
   className = "",
 }) => {
   return (
     <header className={`mx-auto max-w-6xl px-6 py-6 flex items-center justify-between ${className}`}>
-      <a href="#hero" className="flex items-center gap-3 group">
+      <a href="#hero" className="flex items-center gap-3 group text-inherit no-underline">
         <div
           className="w-10 h-10 rounded-xl flex items-center justify-center font-black tracking-tight text-white shadow-lg transition-transform group-hover:scale-105"
           style={{

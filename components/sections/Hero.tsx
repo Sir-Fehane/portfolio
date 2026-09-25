@@ -16,7 +16,7 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({
   availabilityText = "Disponible para proyectos y roles en DevSecOps / Backend",
-  titlePrimary = "Infraestructura, DevSecOps",
+  titlePrimary = "Infraestructura, DevSecOps ",
   titleHighlight = "y Desarrollo Full-Stack",
   titleSecondary = "de extremo a extremo.",
   description = "Ingeniero orientado a DevSecOps e infraestructura Linux con sólida base Full-Stack. Especializado en seguridad perimetral, gestión de accesos y automatización de despliegues vía CI/CD, asegurando aplicaciones desde la arquitectura de código hasta el entorno de producción corporativo.",
@@ -42,8 +42,10 @@ export const Hero: React.FC<HeroProps> = ({
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] text-[#EDEDF0]">
           {titlePrimary}{" "}
           <span
-            className="text-transparent bg-clip-text"
-            style={{ backgroundImage: "linear-gradient(135deg, #EDEDF0 30%, #C23646 100%)" }}
+            className="text-transparent bg-clip-text decoration-clone font-black"
+            style={{
+              backgroundImage: "linear-gradient(135deg, #FF6B7D 0%, #C23646 100%)",
+            }}
           >
             {titleHighlight}
           </span>{" "}
