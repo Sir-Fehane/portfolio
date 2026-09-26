@@ -19,8 +19,8 @@ interface ProjectsSectionProps {
 }
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
-  title = "Proyectos de Alta Complejidad",
-  subtitle = "Portafolio Seleccionado",
+  title = "Proyectos personales",
+  subtitle = "Portafolio",
   projects = MOCK_PROJECTS,
   tabs = [
     { id: "todos", label: "Todos" },
@@ -35,8 +35,8 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     activeTab === "todos"
       ? projects
       : projects.filter((p) =>
-          activeTab === "backend" ? p.category === "backend" : p.category === "fullstack"
-        );
+        activeTab === "backend" ? p.category === "backend" : p.category === "fullstack"
+      );
 
   return (
     <section
@@ -64,11 +64,10 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-3 py-1.5 rounded-md transition-all cursor-pointer ${
-                  activeTab === tab.id
-                    ? "bg-[#C23646] text-white font-semibold shadow-sm"
-                    : "text-[#8E909B] hover:text-[#EDEDF0]"
-                }`}
+                className={`px-3 py-1.5 rounded-md transition-all cursor-pointer ${activeTab === tab.id
+                  ? "bg-[#C23646] text-white font-semibold shadow-sm"
+                  : "text-[#8E909B] hover:text-[#EDEDF0]"
+                  }`}
               >
                 {tab.label}
               </button>

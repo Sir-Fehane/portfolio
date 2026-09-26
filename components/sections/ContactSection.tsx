@@ -1,6 +1,7 @@
 import React from "react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
+import { MatrixRain } from "@/components/ui/MatrixRain";
 
 interface ContactSectionProps {
   badgeText?: string;
@@ -32,9 +33,27 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
           borderColor: "var(--border)",
         }}
       >
+        {/* Lluvia de código Matrix animada en color rojo */}
+        <MatrixRain
+          primaryColor="#C23646"
+          glowColor="#FF6B7D"
+          headColor="#FFFFFF"
+          fontSize={14}
+          opacity={0.4}
+        />
+
+        {/* Gradiente radial para viñeta: mantiene el centro nítido y legible */}
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, rgba(24, 25, 30, 0.88) 15%, rgba(24, 25, 30, 0.45) 80%, rgba(24, 25, 30, 0.9) 100%)",
+          }}
+        />
+
         {/* Luz ambiental sutil roja de fondo */}
         <div
-          className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-[120px] pointer-events-none opacity-25"
+          className="absolute -top-32 left-1/2 -translate-x-1/2 w-96 h-96 rounded-full blur-[120px] pointer-events-none opacity-20"
           style={{ backgroundColor: "var(--accent)" }}
         />
 

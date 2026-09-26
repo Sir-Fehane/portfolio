@@ -3,6 +3,7 @@ export * from "./ui/Badge";
 export * from "./ui/Button";
 export * from "./ui/Card";
 export * from "./ui/MetricCard";
+export * from "./ui/MatrixRain";
 
 // Layout
 export * from "./layout/Navbar";

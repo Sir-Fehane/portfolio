@@ -15,7 +15,7 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({
-  availabilityText = "Disponible para proyectos y roles en DevSecOps / Backend",
+  //availabilityText = "Disponible para proyectos y roles en DevSecOps / Backend",
   titlePrimary = "Infraestructura, DevSecOps ",
   titleHighlight = "y Desarrollo Full-Stack",
   titleSecondary = "de extremo a extremo.",
@@ -27,7 +27,7 @@ export const Hero: React.FC<HeroProps> = ({
     <section id="hero" className={`mx-auto max-w-6xl px-6 pt-12 pb-20 ${className}`}>
       <div className="flex flex-col items-start gap-6 max-w-3xl">
         {/* Badge de Disponibilidad */}
-        <div
+        {/* <div
           className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium border"
           style={{
             backgroundColor: "var(--surface)",
@@ -36,7 +36,7 @@ export const Hero: React.FC<HeroProps> = ({
         >
           <span className="w-2 h-2 rounded-full bg-[#C23646] animate-ping" />
           <span className="text-[#EDEDF0]">{availabilityText}</span>
-        </div>
+        </div>*/}
 
         {/* Título Principal */}
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] text-[#EDEDF0]">
