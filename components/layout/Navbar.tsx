@@ -60,7 +60,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           size="sm"
           icon={<span className="w-2 h-2 rounded-full bg-[#C23646]" />}
         >
-          Hablemos
+          Contacto
         </Button>
       </div>
     </header>

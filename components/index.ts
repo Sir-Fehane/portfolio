@@ -12,6 +12,7 @@ export * from "./layout/Footer";
 // Sections
 export * from "./sections/Hero";
 export * from "./sections/ProjectCard";
+export * from "./sections/ProjectModal";
 export * from "./sections/ProjectsSection";
 export * from "./sections/TechStack";
 export * from "./sections/ExperienceTimeline";

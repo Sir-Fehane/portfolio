@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { ProjectCard } from "@/components/sections/ProjectCard";
+import { ProjectModal } from "@/components/sections/ProjectModal";
 import { MOCK_PROJECTS } from "@/data/portfolioData";
 import { Project } from "@/types/portfolio";
 
@@ -15,6 +16,8 @@ interface ProjectsSectionProps {
   subtitle?: string;
   projects?: Project[];
   tabs?: FilterTab[];
+  showRepo?: boolean;
+  showLive?: boolean;
   className?: string;
 }
 
@@ -27,9 +30,12 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
     { id: "backend", label: "Backend & Infra" },
     { id: "fullstack", label: "Full Stack" },
   ],
+  showRepo = true,
+  showLive = true,
   className = "",
 }) => {
   const [activeTab, setActiveTab] = useState("todos");
+  const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
   const filteredProjects =
     activeTab === "todos"
@@ -77,11 +83,25 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       </div>
 
       {/* Grid de Proyectos */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {filteredProjects.map((p) => (
-          <ProjectCard key={p.id} project={p} />
+          <ProjectCard
+            key={p.id}
+            project={p}
+            showRepo={showRepo}
+            showLive={showLive}
+            onSelect={(proj) => setSelectedProject(proj)}
+          />
         ))}
       </div>
+
+      {/* Modal con Galería 2/3 y Detalle 1/3 */}
+      <ProjectModal
+        project={selectedProject}
+        showRepo={showRepo}
+        showLive={showLive}
+        onClose={() => setSelectedProject(null)}
+      />
     </section>
   );
 };

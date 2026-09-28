@@ -2,6 +2,7 @@ export interface Project {
   id: string;
   title: string;
   category: "backend" | "fullstack" | "frontend" | "devops";
+  shortDesc: string;
   desc: string;
   metrics: string;
   tags: string[];
@@ -9,6 +10,10 @@ export interface Project {
   status: string;
   liveUrl?: string;
   repoUrl?: string;
+  showRepo?: boolean;
+  showLive?: boolean;
+  images?: string[];
+  highlights?: string[];
 }
 
 export interface SkillCategory {
