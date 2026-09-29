@@ -213,15 +213,6 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.title}
               </h3>
 
-              {/* Métrica / Highlight destacado */}
-              {project.metrics && (
-                <div className="mt-3 p-3 rounded-xl bg-[#0D0E11] border border-[#26272E] flex items-center gap-2.5">
-                  <span className="w-2 h-2 rounded-full bg-[#C23646] animate-pulse flex-shrink-0" />
-                  <span className="text-xs font-mono font-medium text-[#EDEDF0]">
-                    {project.metrics}
-                  </span>
-                </div>
-              )}
             </div>
 
             {/* Descripción Completa ("Contando todo lo que se hizo") */}

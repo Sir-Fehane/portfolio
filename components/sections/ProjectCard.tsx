@@ -37,14 +37,6 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({
       className={`flex flex-col justify-between p-5 cursor-pointer group hover:border-[#C23646]/50 transition-all duration-200 ${className}`}
     >
       <div>
-        {/* Top Badges */}
-        <div className="flex items-center justify-between gap-2 mb-3">
-          <Badge variant="accent">{project.status}</Badge>
-          <span className="text-[11px] text-[#8E909B] font-mono truncate max-w-[170px]">
-            {project.metrics}
-          </span>
-        </div>
-
         {/* Project Title */}
         <h3 className="text-base font-bold text-[#EDEDF0] mb-2 group-hover:text-white transition-colors leading-snug line-clamp-1">
           {project.title}

@@ -11,7 +11,6 @@ interface NavbarProps {
 export const Navbar: React.FC<NavbarProps> = ({
   name = "Emiliano Aguilar",
   role = "Ingeniero DevOps & Full Stack",
-  initials = "EA",
   className = "",
 }) => {
   return (
@@ -24,15 +23,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     >
       <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
         <a href="#hero" className="flex items-center gap-3 group text-inherit no-underline">
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center font-black tracking-tight text-white shadow-lg transition-transform group-hover:scale-105"
-            style={{
-              background: "linear-gradient(135deg, var(--accent) 0%, var(--accent-light) 100%)",
-              boxShadow: "0 0 20px var(--accent-glow)",
-            }}
-          >
-            {initials}
-          </div>
           <div className="flex flex-col">
             <span className="font-bold tracking-tight text-[#EDEDF0] text-sm sm:text-base">
               {name}

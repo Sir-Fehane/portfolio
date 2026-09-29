@@ -13,7 +13,7 @@ interface ContactSectionProps {
 }
 
 export const ContactSection: React.FC<ContactSectionProps> = ({
-  badgeText = "Hablemos de tu próximo proyecto",
+  badgeText = "",
   title = "¿Listo para crear algo increíble?",
   description = "Si estás interesado en colaborar en algún proyecto, no dudes en contactarme, estaré encantado de saber de ti.",
   email = "[EMAIL_ADDRESS]",
@@ -58,7 +58,6 @@ export const ContactSection: React.FC<ContactSectionProps> = ({
         />
 
         <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center gap-6">
-          <Badge variant="accent">{badgeText}</Badge>
 
           <h2 className="text-3xl sm:text-5xl font-extrabold text-[#EDEDF0] tracking-tight">
             {title}
