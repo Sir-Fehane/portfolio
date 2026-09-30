@@ -1,7 +1,11 @@
+export type ProjectType = "personal" | "profesional";
+
 export interface Project {
   id: string;
   title: string;
+  type: ProjectType;
   category: "backend" | "fullstack" | "frontend" | "devops";
+  hasImages?: boolean; // Habilita o deshabilita la galería de fotos
   shortDesc: string;
   desc: string;
   metrics: string;

@@ -19,8 +19,12 @@ export const Footer: React.FC<FooterProps> = ({
       <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <span>
-            © {year} {name} • Portafolio
+            © {year} • Portafolio
           </span>
+          <span>
+            Made with <span className="text-red-500">❤️</span> by {name}
+          </span>
+
         </div>
       </div>
     </footer>

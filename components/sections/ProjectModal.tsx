@@ -54,7 +54,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
   if (!project) return null;
 
-  const images = project.images && project.images.length > 0 ? project.images : [];
+  const showGallery = Boolean(project.hasImages) && Boolean(project.images && project.images.length > 0);
+  const images = showGallery ? (project.images || []) : [];
   const hasMultipleImages = images.length > 1;
 
   const handlePrev = () => {
@@ -75,6 +76,129 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   const shouldShowLive =
     (project.showLive ?? showLive) && Boolean(project.liveUrl);
 
+  // VISTA SIN FOTOS / ENFOCADA EN DESCRIPCIÓN Y ARQUITECTURA
+  if (!showGallery) {
+    return (
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-modal-title"
+        className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/85 backdrop-blur-md animate-in fade-in duration-200"
+        onClick={onClose}
+      >
+        <div
+          className="relative w-full max-w-3xl max-h-[88vh] bg-[#18191E] border border-[#26272E] rounded-2xl overflow-hidden flex flex-col shadow-2xl shadow-black"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {/* Header Superior del Panel */}
+          <div className="p-5 border-b border-[#26272E] flex items-center justify-end bg-[#14151A]/80">
+            <button
+              type="button"
+              onClick={onClose}
+              aria-label="Cerrar modal"
+              className="w-8 h-8 rounded-lg bg-[#C23646] hover:bg-[#B0303F] text-white flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-sm shadow-[#C23646]/20"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          {/* Cuerpo Scrollable: Contenido Completo del Proyecto */}
+          <div className="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1">
+            {/* Título Principal y Métricas */}
+            <div>
+              <h3
+                id="project-modal-title"
+                className="text-2xl sm:text-3xl font-extrabold text-[#EDEDF0] tracking-tight leading-snug"
+              >
+                {project.title}
+              </h3>
+            </div>
+
+            {/* Descripción Completa ("Contando todo lo que se hizo") */}
+            <div className="bg-[#121317]/80 rounded-xl p-5 border border-[#26272E]/80">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#C23646] mb-3">
+                Arquitectura &amp; Desarrollo Realizado
+              </h4>
+              <p className="text-sm sm:text-base text-[#EDEDF0] leading-relaxed whitespace-pre-line font-normal">
+                {project.desc}
+              </p>
+            </div>
+
+            {/* Stack Tecnológico */}
+            <div>
+              <h4 className="text-xs font-bold uppercase tracking-wider text-[#8E909B] mb-2.5">
+                Tecnologías &amp; Herramientas
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {project.tags.map((tag) => (
+                  <Badge key={tag} variant="outline" className="text-xs py-1 px-3">
+                    {tag}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Footer de Acciones (Enlaces externos y botón de cierre) */}
+          <div className="p-4 sm:p-5 border-t border-[#26272E] bg-[#14151A] flex flex-col sm:flex-row items-center justify-between gap-3">
+            {(shouldShowRepo || shouldShowLive) ? (
+              <div className="flex items-center gap-3 w-full sm:w-auto">
+                {shouldShowRepo && (
+                  <Button
+                    asAnchor
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    variant="primary"
+                    size="sm"
+                    className="flex-1 sm:flex-initial text-center"
+                    icon={
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    }
+                  >
+                    Ver Repositorio
+                  </Button>
+                )}
+
+                {shouldShowLive && (
+                  <Button
+                    asAnchor
+                    href={project.liveUrl || "#"}
+                    target={project.liveUrl && project.liveUrl !== "#" ? "_blank" : undefined}
+                    rel={project.liveUrl && project.liveUrl !== "#" ? "noreferrer" : undefined}
+                    variant="outline"
+                    size="sm"
+                    className="flex-1 sm:flex-initial text-center"
+                    icon={
+                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    }
+                  >
+                    Demo en Vivo
+                  </Button>
+                )}
+              </div>
+            ) : <div />}
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="text-xs text-[#8E909B] hover:text-[#EDEDF0] transition-colors cursor-pointer"
+            >
+              Cerrar vista (Esc)
+            </button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // VISTA CON GALERÍA DE FOTOS (2/3 Galería + 1/3 Detalle)
   return (
     <div
       role="dialog"
@@ -109,7 +233,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 </svg>
               </div>
               <span className="text-xs font-mono text-[#8E909B] uppercase tracking-wider mb-1">
-                Visualización de Proyecto • {project.category}
+                Visualización de Proyecto • {project.type === "profesional" ? "Profesional" : "Personal"} • {project.category}
               </span>
               <h4 className="text-lg font-bold text-[#EDEDF0] max-w-md">
                 {project.title}
@@ -153,9 +277,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     <span
                       key={idx}
                       onClick={() => setCurrentImgIndex(idx)}
-                      className={`w-2 h-2 rounded-full cursor-pointer transition-all ${
-                        idx === currentImgIndex ? "bg-[#C23646] scale-125" : "bg-white/30 hover:bg-white/60"
-                      }`}
+                      className={`w-2 h-2 rounded-full cursor-pointer transition-all ${idx === currentImgIndex ? "bg-[#C23646] scale-125" : "bg-white/30 hover:bg-white/60"
+                        }`}
                     />
                   ))}
                 </div>
@@ -181,20 +304,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         {/* ========================================================= */}
         <div className="w-full md:w-1/3 h-[55%] md:h-full bg-[#18191E] border-t md:border-t-0 md:border-l border-[#26272E] flex flex-col justify-between overflow-hidden">
           {/* Header Superior del Panel */}
-          <div className="p-5 border-b border-[#26272E] flex items-center justify-between gap-3 bg-[#14151A]/70">
-            <div className="flex items-center gap-2 flex-wrap">
-              <Badge variant="accent">{project.status}</Badge>
-              <span className="text-[11px] font-mono uppercase tracking-wider text-[#8E909B] px-2 py-0.5 rounded border border-[#26272E] bg-[#0D0E11]">
-                {project.category}
-              </span>
-            </div>
-
-            {/* Botón Cerrar en Desktop */}
+          <div className="p-5 border-b border-[#26272E] flex items-center justify-end bg-[#14151A]/80">
             <button
               type="button"
               onClick={onClose}
               aria-label="Cerrar modal"
-              className="hidden md:flex w-8 h-8 rounded-lg bg-[#26272E]/60 hover:bg-[#C23646] text-[#EDEDF0] items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95"
+              className="w-8 h-8 rounded-lg bg-[#C23646] hover:bg-[#B0303F] text-white flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-sm shadow-[#C23646]/20"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
