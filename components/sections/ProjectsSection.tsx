@@ -1,10 +1,11 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ProjectCard } from "@/components/sections/ProjectCard";
 import { ProjectModal } from "@/components/sections/ProjectModal";
-import { MOCK_PROJECTS } from "@/data/portfolioData";
+import { MOCK_PROJECTS, MOCK_PROJECTS_EN } from "@/data/portfolioData";
 import { Project } from "@/types/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface FilterTab {
   id: string;
@@ -22,28 +23,47 @@ interface ProjectsSectionProps {
 }
 
 export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
-  title = "Proyectos",
-  subtitle = "Portafolio",
-  projects = MOCK_PROJECTS,
-  tabs = [
-    { id: "todos", label: "Todos" },
-    { id: "profesionales", label: "Profesionales" },
-    { id: "personales", label: "Personales" },
-  ],
+  title,
+  subtitle,
+  projects,
+  tabs,
   showRepo = true,
   showLive = true,
   className = "",
 }) => {
+  const { isEnglish, t } = useLanguage();
   const [activeTab, setActiveTab] = useState("todos");
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
 
+  const displayTitle = title || t.projects.title;
+  const displaySubtitle = subtitle || t.projects.subtitle;
+
+  // Seleccionar proyectos según el idioma activo si no se especifican por prop
+  const currentProjectsList = projects || (isEnglish ? MOCK_PROJECTS_EN : MOCK_PROJECTS);
+
+  // Sincronizar el proyecto seleccionado en el modal cuando cambia el idioma
+  useEffect(() => {
+    if (selectedProject) {
+      const match = currentProjectsList.find((p) => p.id === selectedProject.id);
+      if (match) {
+        setSelectedProject(match);
+      }
+    }
+  }, [isEnglish, currentProjectsList]);
+
+  const currentTabs: FilterTab[] = tabs || [
+    { id: "todos", label: t.projects.tabAll },
+    { id: "profesionales", label: t.projects.tabProfessional },
+    { id: "personales", label: t.projects.tabPersonal },
+  ];
+
   const counts: Record<string, number> = {
-    todos: projects.length,
-    profesionales: projects.filter((p) => p.type === "profesional").length,
-    personales: projects.filter((p) => p.type === "personal").length,
+    todos: currentProjectsList.length,
+    profesionales: currentProjectsList.filter((p) => p.type === "profesional").length,
+    personales: currentProjectsList.filter((p) => p.type === "personal").length,
   };
 
-  const filteredProjects = projects.filter((p) => {
+  const filteredProjects = currentProjectsList.filter((p) => {
     if (activeTab === "todos") return true;
     if (activeTab === "profesionales") return p.type === "profesional";
     if (activeTab === "personales") return p.type === "personal";
@@ -56,23 +76,23 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       className={`mx-auto max-w-6xl px-6 py-16 border-t ${className}`}
       style={{ borderColor: "var(--border)" }}
     >
-      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-10 gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-6 gap-4">
         <div>
           <div className="text-xs font-bold uppercase tracking-wider text-[#C23646] mb-2">
-            {subtitle}
+            {displaySubtitle}
           </div>
           <h2 className="text-3xl font-extrabold text-[#EDEDF0] tracking-tight">
-            {title}
+            {displayTitle}
           </h2>
         </div>
 
         {/* Tabs de Filtro */}
-        {tabs && tabs.length > 0 && (
+        {currentTabs && currentTabs.length > 0 && (
           <div
             className="inline-flex p-1 rounded-lg border text-xs font-medium"
             style={{ backgroundColor: "var(--surface)", borderColor: "var(--border)" }}
           >
-            {tabs.map((tab) => (
+            {currentTabs.map((tab) => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
@@ -100,6 +120,24 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
         )}
       </div>
 
+      {/* Aviso sobre las demos: únicamente visible en inglés */}
+      {isEnglish && (
+        <div className="mb-8 p-3.5 sm:p-4 rounded-xl border border-[#C23646]/30 bg-gradient-to-r from-[#C23646]/10 via-[#18191E] to-[#18191E] flex items-center gap-3">
+          <div className="p-1.5 rounded-lg bg-[#C23646]/20 border border-[#C23646]/40 text-[#FF6B7D] shrink-0">
+            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <div className="text-xs text-[#8E909B] leading-relaxed">
+            <span className="font-semibold text-[#EDEDF0] uppercase tracking-wider text-[11px] mr-1.5 inline-flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#C23646]" />
+              {t.projects.disclaimerTitle}:
+            </span>
+            {t.projects.disclaimerText}
+          </div>
+        </div>
+      )}
+
       {/* Grid de Proyectos */}
       {filteredProjects.length > 0 ? (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
@@ -116,7 +154,7 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({
       ) : (
         <div className="text-center py-16 border border-dashed rounded-xl border-[#26272E] bg-[#14151A]/50">
           <p className="text-sm text-[#8E909B]">
-            No hay proyectos catalogados en esta categoría aún.
+            {t.projects.emptyText}
           </p>
         </div>
       )}

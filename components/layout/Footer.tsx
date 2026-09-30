@@ -1,4 +1,7 @@
+"use client";
+
 import React from "react";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface FooterProps {
   name?: string;
@@ -11,6 +14,8 @@ export const Footer: React.FC<FooterProps> = ({
   year = new Date().getFullYear(),
   className = "",
 }) => {
+  const { t } = useLanguage();
+
   return (
     <footer
       className={`border-t py-8 text-center text-xs text-[#8E909B] ${className}`}
@@ -19,12 +24,12 @@ export const Footer: React.FC<FooterProps> = ({
       <div className="mx-auto max-w-6xl px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-2">
           <span>
-            © {year} • Portafolio
+            © {year} • {t.footer.portfolio}
           </span>
+          <span>•</span>
           <span>
-            Made with <span className="text-red-500">❤️</span> by {name}
+            {t.footer.madeWith} <span className="text-red-500">❤️</span> {t.footer.by} {name}
           </span>
-
         </div>
       </div>
     </footer>

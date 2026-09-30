@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { Project } from "@/types/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -18,6 +19,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   showRepo = true,
   showLive = true,
 }) => {
+  const { isEnglish, t } = useLanguage();
   const [currentImgIndex, setCurrentImgIndex] = useState(0);
   const [imgError, setImgError] = useState(false);
 
@@ -95,7 +97,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              aria-label="Cerrar modal"
+              aria-label={t.projects.modalCloseAria}
               className="w-8 h-8 rounded-lg bg-[#C23646] hover:bg-[#B0303F] text-white flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-sm shadow-[#C23646]/20"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -106,7 +108,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
 
           {/* Cuerpo Scrollable: Contenido Completo del Proyecto */}
           <div className="p-6 sm:p-8 overflow-y-auto space-y-6 flex-1">
-            {/* Título Principal y Métricas */}
+            {/* Título Principal */}
             <div>
               <h3
                 id="project-modal-title"
@@ -116,10 +118,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               </h3>
             </div>
 
-            {/* Descripción Completa ("Contando todo lo que se hizo") */}
+            {/* Descripción Completa */}
             <div className="bg-[#121317]/80 rounded-xl p-5 border border-[#26272E]/80">
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#C23646] mb-3">
-                Arquitectura &amp; Desarrollo Realizado
+                {t.projects.modalArchitecture}
               </h4>
               <p className="text-sm sm:text-base text-[#EDEDF0] leading-relaxed whitespace-pre-line font-normal">
                 {project.desc}
@@ -129,7 +131,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             {/* Stack Tecnológico */}
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#8E909B] mb-2.5">
-                Tecnologías &amp; Herramientas
+                {t.projects.modalTech}
               </h4>
               <div className="flex flex-wrap gap-2">
                 {project.tags.map((tag) => (
@@ -144,43 +146,51 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           {/* Footer de Acciones (Enlaces externos y botón de cierre) */}
           <div className="p-4 sm:p-5 border-t border-[#26272E] bg-[#14151A] flex flex-col sm:flex-row items-center justify-between gap-3">
             {(shouldShowRepo || shouldShowLive) ? (
-              <div className="flex items-center gap-3 w-full sm:w-auto">
-                {shouldShowRepo && (
-                  <Button
-                    asAnchor
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    variant="primary"
-                    size="sm"
-                    className="flex-1 sm:flex-initial text-center"
-                    icon={
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    }
-                  >
-                    Ver Repositorio
-                  </Button>
-                )}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 w-full sm:w-auto">
+                <div className="flex items-center gap-3 w-full sm:w-auto">
+                  {shouldShowRepo && (
+                    <Button
+                      asAnchor
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      variant="primary"
+                      size="sm"
+                      className="flex-1 sm:flex-initial text-center"
+                      icon={
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      }
+                    >
+                      {t.projects.modalViewRepo}
+                    </Button>
+                  )}
 
-                {shouldShowLive && (
-                  <Button
-                    asAnchor
-                    href={project.liveUrl || "#"}
-                    target={project.liveUrl && project.liveUrl !== "#" ? "_blank" : undefined}
-                    rel={project.liveUrl && project.liveUrl !== "#" ? "noreferrer" : undefined}
-                    variant="outline"
-                    size="sm"
-                    className="flex-1 sm:flex-initial text-center"
-                    icon={
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    }
-                  >
-                    Demo en Vivo
-                  </Button>
+                  {shouldShowLive && (
+                    <Button
+                      asAnchor
+                      href={project.liveUrl || "#"}
+                      target={project.liveUrl && project.liveUrl !== "#" ? "_blank" : undefined}
+                      rel={project.liveUrl && project.liveUrl !== "#" ? "noreferrer" : undefined}
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 sm:flex-initial text-center"
+                      icon={
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      }
+                    >
+                      {t.projects.modalLiveDemo}
+                    </Button>
+                  )}
+                </div>
+
+                {isEnglish && shouldShowLive && (
+                  <span className="text-[11px] text-[#8E909B] font-mono">
+                    * {t.projects.modalSpanishNoticeText}
+                  </span>
                 )}
               </div>
             ) : <div />}
@@ -190,7 +200,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               onClick={onClose}
               className="text-xs text-[#8E909B] hover:text-[#EDEDF0] transition-colors cursor-pointer"
             >
-              Cerrar vista (Esc)
+              {t.projects.modalCloseEsc}
             </button>
           </div>
         </div>
@@ -212,20 +222,19 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
         onClick={(e) => e.stopPropagation()}
       >
         {/* ========================================================= */}
-        {/* LADO IZQUIERDO: 2/3 Galería de Imágenes (estilo post FB) */}
+        {/* LADO IZQUIERDO: 2/3 Galería de Imágenes                   */}
         {/* ========================================================= */}
         <div className="w-full md:w-2/3 h-[45%] md:h-full bg-[#0A0B0E] relative flex flex-col items-center justify-center select-none overflow-hidden group">
           {images.length > 0 && !imgError ? (
             <div className="relative w-full h-full flex items-center justify-center p-3 sm:p-6">
               <img
                 src={images[currentImgIndex]}
-                alt={`${project.title} - Imagen ${currentImgIndex + 1}`}
+                alt={`${project.title} - ${t.projects.modalImgAlt} ${currentImgIndex + 1}`}
                 className="max-w-full max-h-full object-contain rounded-lg shadow-lg transition-all duration-300"
                 onError={() => setImgError(true)}
               />
             </div>
           ) : (
-            // Placeholder interactivo si no hay imágenes o fallan
             <div className="w-full h-full flex flex-col items-center justify-center p-8 text-center bg-gradient-to-b from-[#121318] to-[#0A0B0E]">
               <div className="w-20 h-20 rounded-2xl bg-[#18191E] border border-[#26272E] flex items-center justify-center mb-4 shadow-xl">
                 <svg className="w-10 h-10 text-[#C23646]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -233,13 +242,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 </svg>
               </div>
               <span className="text-xs font-mono text-[#8E909B] uppercase tracking-wider mb-1">
-                Visualización de Proyecto • {project.type === "profesional" ? "Profesional" : "Personal"} • {project.category}
+                {t.projects.modalPreview} • {project.type === "profesional" ? t.projects.modalCategoryProfessional : t.projects.modalCategoryPersonal} • {project.category}
               </span>
               <h4 className="text-lg font-bold text-[#EDEDF0] max-w-md">
                 {project.title}
               </h4>
               <p className="text-xs text-[#8E909B] mt-2 max-w-sm">
-                Placeholder de galería de capturas y diagramas de arquitectura.
+                {t.projects.modalPlaceholderDesc}
               </p>
             </div>
           )}
@@ -250,7 +259,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               <button
                 type="button"
                 onClick={handlePrev}
-                aria-label="Imagen anterior"
+                aria-label={t.projects.modalPrevImg}
                 className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 hover:bg-[#C23646] text-white flex items-center justify-center backdrop-blur-sm border border-white/10 transition-all active:scale-90 cursor-pointer shadow-lg z-10"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -261,7 +270,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               <button
                 type="button"
                 onClick={handleNext}
-                aria-label="Siguiente imagen"
+                aria-label={t.projects.modalNextImg}
                 className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/70 hover:bg-[#C23646] text-white flex items-center justify-center backdrop-blur-sm border border-white/10 transition-all active:scale-90 cursor-pointer shadow-lg z-10"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -277,8 +286,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     <span
                       key={idx}
                       onClick={() => setCurrentImgIndex(idx)}
-                      className={`w-2 h-2 rounded-full cursor-pointer transition-all ${idx === currentImgIndex ? "bg-[#C23646] scale-125" : "bg-white/30 hover:bg-white/60"
-                        }`}
+                      className={`w-2 h-2 rounded-full cursor-pointer transition-all ${
+                        idx === currentImgIndex ? "bg-[#C23646] scale-125" : "bg-white/30 hover:bg-white/60"
+                      }`}
                     />
                   ))}
                 </div>
@@ -290,7 +300,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           <button
             type="button"
             onClick={onClose}
-            aria-label="Cerrar modal"
+            aria-label={t.projects.modalCloseAria}
             className="md:hidden absolute top-3 right-3 w-9 h-9 rounded-full bg-black/75 hover:bg-[#C23646] text-white flex items-center justify-center border border-white/10 transition-all z-20 cursor-pointer"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -308,7 +318,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             <button
               type="button"
               onClick={onClose}
-              aria-label="Cerrar modal"
+              aria-label={t.projects.modalCloseAria}
               className="w-8 h-8 rounded-lg bg-[#C23646] hover:bg-[#B0303F] text-white flex items-center justify-center transition-all cursor-pointer hover:scale-105 active:scale-95 shadow-sm shadow-[#C23646]/20"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -318,7 +328,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           </div>
 
           {/* Cuerpo Scrollable: Contenido Completo del Proyecto */}
-          <div className="p-5 sm:p-6 overflow-y-auto space-y-5 flex-1">
+          <div className="p-5 sm:p-6 overflow-y-auto space-y-4 flex-1">
             {/* Título Principal */}
             <div>
               <h3
@@ -327,13 +337,12 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               >
                 {project.title}
               </h3>
-
             </div>
 
-            {/* Descripción Completa ("Contando todo lo que se hizo") */}
+            {/* Descripción Completa */}
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#C23646] mb-2">
-                Arquitectura &amp; Desarrollo Realizado
+                {t.projects.modalArchitecture}
               </h4>
               <p className="text-sm text-[#EDEDF0] leading-relaxed whitespace-pre-line font-normal">
                 {project.desc}
@@ -343,7 +352,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             {/* Stack Tecnológico */}
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-[#8E909B] mb-2.5">
-                Tecnologías &amp; Herramientas
+                {t.projects.modalTech}
               </h4>
               <div className="flex flex-wrap gap-1.5">
                 {project.tags.map((tag) => (
@@ -358,43 +367,51 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
           {/* Footer de Acciones (Enlaces externos y botón de cierre) */}
           <div className="p-4 border-t border-[#26272E] bg-[#14151A] flex flex-col gap-2.5">
             {(shouldShowRepo || shouldShowLive) && (
-              <div className="flex items-center gap-3">
-                {shouldShowRepo && (
-                  <Button
-                    asAnchor
-                    href={project.repoUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    variant="primary"
-                    size="sm"
-                    className="flex-1 text-center"
-                    icon={
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    }
-                  >
-                    Ver Repositorio
-                  </Button>
-                )}
+              <div className="flex flex-col gap-2">
+                <div className="flex items-center gap-3">
+                  {shouldShowRepo && (
+                    <Button
+                      asAnchor
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      variant="primary"
+                      size="sm"
+                      className="flex-1 text-center"
+                      icon={
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      }
+                    >
+                      {t.projects.modalViewRepo}
+                    </Button>
+                  )}
 
-                {shouldShowLive && (
-                  <Button
-                    asAnchor
-                    href={project.liveUrl || "#"}
-                    target={project.liveUrl && project.liveUrl !== "#" ? "_blank" : undefined}
-                    rel={project.liveUrl && project.liveUrl !== "#" ? "noreferrer" : undefined}
-                    variant="outline"
-                    size="sm"
-                    className="flex-1 text-center"
-                    icon={
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                      </svg>
-                    }
-                  >
-                    Demo en Vivo
-                  </Button>
+                  {shouldShowLive && (
+                    <Button
+                      asAnchor
+                      href={project.liveUrl || "#"}
+                      target={project.liveUrl && project.liveUrl !== "#" ? "_blank" : undefined}
+                      rel={project.liveUrl && project.liveUrl !== "#" ? "noreferrer" : undefined}
+                      variant="outline"
+                      size="sm"
+                      className="flex-1 text-center"
+                      icon={
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      }
+                    >
+                      {t.projects.modalLiveDemo}
+                    </Button>
+                  )}
+                </div>
+
+                {isEnglish && shouldShowLive && (
+                  <span className="text-[11px] text-[#8E909B] font-mono text-center">
+                    * {t.projects.modalSpanishNoticeText}
+                  </span>
                 )}
               </div>
             )}
@@ -404,7 +421,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               onClick={onClose}
               className="text-xs text-[#8E909B] hover:text-[#EDEDF0] text-center py-1 transition-colors cursor-pointer"
             >
-              Cerrar vista (Esc)
+              {t.projects.modalCloseEsc}
             </button>
           </div>
         </div>

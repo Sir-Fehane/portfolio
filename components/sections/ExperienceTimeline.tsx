@@ -1,7 +1,9 @@
+"use client";
+
 import React from "react";
 import { Card } from "@/components/ui/Card";
-import { MOCK_EXPERIENCE } from "@/data/portfolioData";
 import { ExperienceItem } from "@/types/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface ExperienceTimelineProps {
   title?: string;
@@ -11,11 +13,17 @@ interface ExperienceTimelineProps {
 }
 
 export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({
-  title = "Experiencia Profesional",
-  subtitle = "Trayectoria",
-  items = MOCK_EXPERIENCE,
+  title,
+  subtitle,
+  items,
   className = "",
 }) => {
+  const { t } = useLanguage();
+
+  const displayTitle = title || t.experience.title;
+  const displaySubtitle = subtitle || t.experience.subtitle;
+  const displayItems = items || t.experience.items;
+
   return (
     <section
       id="experiencia"
@@ -24,15 +32,15 @@ export const ExperienceTimeline: React.FC<ExperienceTimelineProps> = ({
     >
       <div className="max-w-2xl mb-12">
         <div className="text-xs font-bold uppercase tracking-wider text-[#C23646] mb-2">
-          {subtitle}
+          {displaySubtitle}
         </div>
         <h2 className="text-3xl font-extrabold text-[#EDEDF0] tracking-tight">
-          {title}
+          {displayTitle}
         </h2>
       </div>
 
       <div className="space-y-6 relative before:absolute before:left-3 sm:before:left-4 before:top-2 before:bottom-2 before:w-[2px] before:bg-[#26272E]">
-        {items.map((exp, i) => (
+        {displayItems.map((exp, i) => (
           <div key={i} className="relative pl-8 sm:pl-10">
             {/* Nodo de acento carmesí con glow */}
             <span

@@ -1,8 +1,10 @@
+"use client";
+
 import React from "react";
 import { Button } from "@/components/ui/Button";
 import { MetricCard } from "@/components/ui/MetricCard";
-import { MOCK_METRICS } from "@/data/portfolioData";
 import { MetricItem } from "@/types/portfolio";
+import { useLanguage } from "@/context/LanguageContext";
 
 interface HeroProps {
   metrics?: MetricItem[];
@@ -10,9 +12,13 @@ interface HeroProps {
 }
 
 export const Hero: React.FC<HeroProps> = ({
-  metrics = MOCK_METRICS,
+  metrics,
   className = "",
 }) => {
+  const { t } = useLanguage();
+
+  const displayMetrics = metrics || t.hero.metrics;
+
   return (
     // max-w-6xl px-6 para alinearse exactamente con Navbar, Proyectos y Stack
     <section id="hero" className={`mx-auto max-w-6xl px-6 pt-12 pb-20 ${className}`}>
@@ -25,20 +31,20 @@ export const Hero: React.FC<HeroProps> = ({
 
           {/* Título Principal con DevSecOps en degradado y misma tipografía pesada */}
           <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight leading-[1.1] text-[#EDEDF0]">
-            Infraestructura,{" "}
+            {t.hero.titlePrefix}
             <span
               className="text-transparent bg-clip-text decoration-clone font-black"
               style={{
                 backgroundImage: "linear-gradient(135deg, #FF6B7D 0%, #C23646 100%)",
               }}
             >
-              DevSecOps
-            </span>{" "}
-            y Desarrollo Full-Stack
+              {t.hero.titleAccent}
+            </span>
+            {t.hero.titleSuffix}
           </h1>
 
           <p className="text-base sm:text-lg text-[#8E909B] leading-relaxed max-w-xl">
-            Automatizo pipelines CI/CD y blindo infraestructura en Linux. Desarrollo Full-Stack con seguridad integrada de código a producción
+            {t.hero.subtitle}
           </p>
 
           {/* Botones de Acción */}
@@ -54,11 +60,11 @@ export const Hero: React.FC<HeroProps> = ({
                 </svg>
               }
             >
-              Explorar Proyectos
+              {t.hero.exploreBtn}
             </Button>
 
             <Button asAnchor href="#contacto" variant="secondary" size="md">
-              Descargar CV / Contacto
+              {t.hero.contactBtn}
             </Button>
           </div>
         </div>
@@ -73,7 +79,7 @@ export const Hero: React.FC<HeroProps> = ({
                 <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
               </div>
-              <span className="text-zinc-500 text-[11px]">secops@pipeline:~/audit</span>
+              <span className="text-zinc-500 text-[11px]">{t.hero.terminalUser}</span>
             </div>
 
             {/* Logs de la terminal */}
@@ -95,9 +101,9 @@ export const Hero: React.FC<HeroProps> = ({
       </div>
 
       {/* 2. Métricas en la parte inferior: ancho completo para enmarcar el Hero */}
-      {metrics && metrics.length > 0 && (
+      {displayMetrics && displayMetrics.length > 0 && (
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 w-full pt-12">
-          {metrics.map((stat, i) => (
+          {displayMetrics.map((stat, i) => (
             <MetricCard key={i} metric={stat} />
           ))}
         </div>
