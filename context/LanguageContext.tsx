@@ -8,6 +8,8 @@ interface LanguageContextType {
   setLanguage: (lang: Language) => void;
   t: Translations;
   isEnglish: boolean;
+  cvUrl: string;
+  cvFileName: string;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -53,11 +55,23 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   }, [language]);
 
+  const cvUrl =
+    language === "en"
+      ? "/CV%20ENGLISH%20Oscar%20Emiliano%20Alvarado%20Aguilar.pdf"
+      : "/CV%20SPANISH%20Oscar%20Emiliano%20Alvarado%20Aguilar.pdf";
+
+  const cvFileName =
+    language === "en"
+      ? "CV ENGLISH Oscar Emiliano Alvarado Aguilar.pdf"
+      : "CV SPANISH Oscar Emiliano Alvarado Aguilar.pdf";
+
   const value: LanguageContextType = {
     language,
     setLanguage,
     t: translations[language],
     isEnglish: language === "en",
+    cvUrl,
+    cvFileName,
   };
 
   return (

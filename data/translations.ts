@@ -10,6 +10,7 @@ export interface Translations {
     stack: string;
     experience: string;
     contact: string;
+    cv: string;
     selectLanguage: string;
   };
   hero: {
@@ -19,6 +20,9 @@ export interface Translations {
     subtitle: string;
     exploreBtn: string;
     contactBtn: string;
+    cvBtn: string;
+    cvUrl: string;
+    cvFileName: string;
     terminalUser: string;
     metrics: MetricItem[];
   };
@@ -66,6 +70,7 @@ export interface Translations {
     title: string;
     description: string;
     githubButton: string;
+    cvButton: string;
   };
   footer: {
     portfolio: string;
@@ -83,6 +88,7 @@ export const translations: Record<Language, Translations> = {
       stack: "Stack",
       experience: "Experiencia",
       contact: "Contacto",
+      cv: "CV",
       selectLanguage: "Seleccionar idioma",
     },
     hero: {
@@ -92,7 +98,10 @@ export const translations: Record<Language, Translations> = {
       subtitle:
         "Automatizo pipelines CI/CD y blindo infraestructura en Linux. Desarrollo Full-Stack con seguridad integrada de código a producción",
       exploreBtn: "Explorar Proyectos",
-      contactBtn: "Descargar CV / Contacto",
+      contactBtn: "Contacto",
+      cvBtn: "Descargar CV",
+      cvUrl: "/CV%20SPANISH%20Oscar%20Emiliano%20Alvarado%20Aguilar.pdf",
+      cvFileName: "CV SPANISH Oscar Emiliano Alvarado Aguilar.pdf",
       terminalUser: "secops@pipeline:~/audit",
       metrics: [
         { num: "+3 Años", label: "Experiencia en Desarrollo Full-Stack & SecOps" },
@@ -200,6 +209,7 @@ export const translations: Record<Language, Translations> = {
       description:
         "Si estás interesado en colaborar en algún proyecto, no dudes en contactarme, estaré encantado de saber de ti.",
       githubButton: "Perfil de GitHub",
+      cvButton: "Descargar CV",
     },
     footer: {
       portfolio: "Portafolio",
@@ -215,6 +225,7 @@ export const translations: Record<Language, Translations> = {
       stack: "Stack",
       experience: "Experience",
       contact: "Contact",
+      cv: "CV",
       selectLanguage: "Select language",
     },
     hero: {
@@ -224,7 +235,10 @@ export const translations: Record<Language, Translations> = {
       subtitle:
         "I automate CI/CD pipelines and harden Linux infrastructure. Full-Stack development with security built-in from code to production.",
       exploreBtn: "Explore Projects",
-      contactBtn: "Download CV / Contact",
+      contactBtn: "Contact",
+      cvBtn: "Download CV",
+      cvUrl: "/CV%20ENGLISH%20Oscar%20Emiliano%20Alvarado%20Aguilar.pdf",
+      cvFileName: "CV ENGLISH Oscar Emiliano Alvarado Aguilar.pdf",
       terminalUser: "secops@pipeline:~/audit",
       metrics: [
         { num: "+3 Years", label: "Full-Stack Development & SecOps Experience" },
@@ -334,6 +348,7 @@ export const translations: Record<Language, Translations> = {
       description:
         "Interested in collaborating or discussing an upcoming project? Feel free to reach out, I would love to hear from you.",
       githubButton: "GitHub Profile",
+      cvButton: "Download CV",
     },
     footer: {
       portfolio: "Portfolio",

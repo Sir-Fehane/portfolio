@@ -62,11 +62,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={() => setLanguage("es")}
-              className={`px-2 py-1 rounded-md transition-all cursor-pointer font-bold ${
-                language === "es"
-                  ? "bg-[#C23646] text-white shadow-sm"
-                  : "text-[#8E909B] hover:text-[#EDEDF0]"
-              }`}
+              className={`px-2 py-1 rounded-md transition-all cursor-pointer font-bold ${language === "es"
+                ? "bg-[#C23646] text-white shadow-sm"
+                : "text-[#8E909B] hover:text-[#EDEDF0]"
+                }`}
               aria-pressed={language === "es"}
               title="Español"
             >
@@ -75,11 +74,10 @@ export const Navbar: React.FC<NavbarProps> = ({
             <button
               type="button"
               onClick={() => setLanguage("en")}
-              className={`px-2 py-1 rounded-md transition-all cursor-pointer font-bold ${
-                language === "en"
-                  ? "bg-[#C23646] text-white shadow-sm"
-                  : "text-[#8E909B] hover:text-[#EDEDF0]"
-              }`}
+              className={`px-2 py-1 rounded-md transition-all cursor-pointer font-bold ${language === "en"
+                ? "bg-[#C23646] text-white shadow-sm"
+                : "text-[#8E909B] hover:text-[#EDEDF0]"
+                }`}
               aria-pressed={language === "en"}
               title="English"
             >

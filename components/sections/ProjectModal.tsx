@@ -229,7 +229,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             <div className="relative w-full h-full flex items-center justify-center p-3 sm:p-6">
               <img
                 src={images[currentImgIndex]}
-                alt={`${project.title} - ${t.projects.modalImgAlt} ${currentImgIndex + 1}`}
+                alt={`${project.title} - ${currentImgIndex + 1}`}
                 className="max-w-full max-h-full object-contain rounded-lg shadow-lg transition-all duration-300"
                 onError={() => setImgError(true)}
               />
@@ -286,9 +286,8 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     <span
                       key={idx}
                       onClick={() => setCurrentImgIndex(idx)}
-                      className={`w-2 h-2 rounded-full cursor-pointer transition-all ${
-                        idx === currentImgIndex ? "bg-[#C23646] scale-125" : "bg-white/30 hover:bg-white/60"
-                      }`}
+                      className={`w-2 h-2 rounded-full cursor-pointer transition-all ${idx === currentImgIndex ? "bg-[#C23646] scale-125" : "bg-white/30 hover:bg-white/60"
+                        }`}
                     />
                   ))}
                 </div>

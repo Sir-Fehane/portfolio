@@ -15,7 +15,7 @@ export const Hero: React.FC<HeroProps> = ({
   metrics,
   className = "",
 }) => {
-  const { t } = useLanguage();
+  const { cvUrl, cvFileName, t } = useLanguage();
 
   const displayMetrics = metrics || t.hero.metrics;
 
@@ -63,8 +63,21 @@ export const Hero: React.FC<HeroProps> = ({
               {t.hero.exploreBtn}
             </Button>
 
-            <Button asAnchor href="#contacto" variant="secondary" size="md">
-              {t.hero.contactBtn}
+            <Button
+              asAnchor
+              href={cvUrl}
+              download={cvFileName}
+              target="_blank"
+              rel="noopener noreferrer"
+              variant="secondary"
+              size="md"
+              icon={
+                <svg className="w-4 h-4 text-[#FF6B7D]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+              }
+            >
+              {t.hero.cvBtn}
             </Button>
           </div>
         </div>

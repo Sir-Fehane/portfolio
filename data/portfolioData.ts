@@ -29,7 +29,7 @@ export const MOCK_PROJECTS: Project[] = [
     tags: ["OAuth 2.1", "ESP32", "MQTT", "React", "Mobile", "Geofencing", "Biometría", "SQL"],
     featured: true,
     status: "Completado",
-    liveUrl: "#",
+    liveUrl: "https://sgeb.emilianoaaguilar.tech",
     repoUrl: "https://github.com/Sir-Fehane",
     images: [
       "/projects/sgeb1.png",
@@ -38,17 +38,17 @@ export const MOCK_PROJECTS: Project[] = [
   },
   {
     id: "presta-facil",
-    title: "Presta Fácil — Infraestructura Geodistribuida",
+    title: "Presta Fácil — Plataforma Fintech & Infraestructura Geodistribuida",
     type: "personal", // 'personal' | 'profesional' - Modificable por el usuario
-    hasImages: true, // true para mostrar galería de fotos | false para vista de lectura enfocada
+    hasImages: true,
     category: "backend",
-    shortDesc: "Red geodistribuida en 3 regiones con WireGuard, clúster MySQL GTID y balanceo Nginx de alta disponibilidad.",
-    desc: "Arquitectura de red geodistribuida en tres regiones (San Francisco, Nueva York y Toronto) interconectadas mediante túneles VPN cifrados con WireGuard para aislar el tráfico interno. Implementación de balanceo de carga y alta disponibilidad con Nginx para APIs AdonisJS 7 y frontend React con rate limiting estricto, failover automático y cabeceras de seguridad. Clúster de base de datos MySQL con replicación activa basada en GTID y seguridad perimetral con Firewalld (políticas de denegación por defecto, segmentación granular Pública/VPN y rich rules).",
-    metrics: "3 Regiones VPN • MySQL GTID • Failover Nginx",
-    tags: ["AdonisJS 7", "React", "MySQL Replicado", "WireGuard", "Nginx", "Firewalld"],
+    shortDesc: "Plataforma de microfinanciera multi-rol (Gerente, Coordinador, Cajera, Distribuidora) respaldada por una red geodistribuida en 3 regiones con WireGuard y MySQL GTID.",
+    desc: "Plataforma web integral para empresas prestamistas y microfinancieras con control de acceso granular por roles: Gerente, Coordinador, Cajera y Distribuidora. La aplicación opera sobre una arquitectura de red geodistribuida en tres regiones (San Francisco, Nueva York y Toronto) interconectadas mediante túneles VPN cifrados con WireGuard para aislar el tráfico de servicios. Implementa balanceo de carga y alta disponibilidad con Nginx para APIs en AdonisJS 7 y frontend en React con rate limiting estricto, failover automático y cabeceras de seguridad. La capa de persistencia se basa en un clúster MySQL con replicación activa basada en GTID para consistencia financiera, protegido perimetralmente con Firewalld (políticas de denegación por defecto, segmentación granular y rich rules).",
+    metrics: "4 Roles Operativos • 3 Regiones VPN • MySQL GTID • Failover Nginx",
+    tags: ["AdonisJS 7", "React", "Fintech", "MySQL Replicado", "WireGuard", "Nginx", "Firewalld", "Rocky Linux 9"],
     featured: true,
     status: "Completado",
-    liveUrl: "#",
+    liveUrl: "https://presta.emilianoaaguilar.tech",
     repoUrl: "https://github.com/Sir-Fehane",
     images: [
       "/projects/presta1.jpeg",
@@ -246,7 +246,7 @@ export const MOCK_PROJECTS_EN: Project[] = [
     tags: ["OAuth 2.1", "ESP32", "MQTT", "React", "Mobile", "Geofencing", "Biometrics", "SQL"],
     featured: true,
     status: "Completed",
-    liveUrl: "#",
+    liveUrl: "https://sgeb.emilianoaaguilar.tech",
     repoUrl: "https://github.com/Sir-Fehane",
     images: [
       "/projects/sgeb1.png",
@@ -255,17 +255,17 @@ export const MOCK_PROJECTS_EN: Project[] = [
   },
   {
     id: "presta-facil",
-    title: "Presta Fácil — Geo-Distributed Infrastructure",
-    type: "personal",
+    title: "Presta Fácil — Fintech Platform & Geo-Distributed Infrastructure",
+    type: "personal", // 'personal' | 'professional' - Modifiable by user
     hasImages: true,
     category: "backend",
-    shortDesc: "Geo-distributed network across 3 regions with WireGuard, MySQL GTID cluster, and high-availability Nginx load balancing.",
-    desc: "Geo-distributed network architecture across three regions (San Francisco, New York, and Toronto) interconnected via encrypted WireGuard VPN tunnels to isolate internal traffic. High availability and load balancing setup with Nginx for AdonisJS 7 APIs and React frontend with strict rate limiting, automated failover, and hardened security headers. MySQL database cluster with GTID-based active replication and perimeter defense via Firewalld (default-deny policies, granular Public/VPN segmentation, and rich rules).",
-    metrics: "3 VPN Regions • MySQL GTID • Nginx Failover",
-    tags: ["AdonisJS 7", "React", "Replicated MySQL", "WireGuard", "Nginx", "Firewalld"],
+    shortDesc: "Multi-role microfinance platform (Manager, Coordinator, Cashier, Distributor) backed by a 3-region geo-distributed network with WireGuard and MySQL GTID.",
+    desc: "Comprehensive web platform for lending companies and microfinance institutions featuring granular role-based access control: Manager, Coordinator, Cashier, and Distributor. The application runs on a geo-distributed network architecture across three regions (San Francisco, New York, and Toronto) interconnected via encrypted WireGuard VPN tunnels to isolate service traffic. It implements load balancing and high availability using Nginx for AdonisJS 7 APIs and a React frontend, equipped with strict rate limiting, automated failover, and hardened security headers. The persistence layer relies on a MySQL cluster with GTID-based active replication to ensure financial consistency, secured at the perimeter via Firewalld (default-deny policies, granular segmentation, and rich rules).",
+    metrics: "4 Operational Roles • 3 VPN Regions • MySQL GTID • Nginx Failover",
+    tags: ["AdonisJS 7", "React", "Fintech", "Replicated MySQL", "WireGuard", "Nginx", "Firewalld", "Rocky Linux 9"],
     featured: true,
     status: "Completed",
-    liveUrl: "#",
+    liveUrl: "https://presta.emilianoaaguilar.tech",
     repoUrl: "https://github.com/Sir-Fehane",
     images: [
       "/projects/presta1.jpeg",
@@ -452,7 +452,7 @@ export const MOCK_PROJECTS_EN: Project[] = [
 export const MOCK_SKILLS: SkillCategory[] = [
   {
     category: "Backend & APIs",
-    items: ["Python (FastAPI, Django)", "Node.js (AdonisJS, Strapi)", "PHP 8.2 (Laravel)", "WebSockets / SSE", "SQLAlchemy", "REST APIs"],
+    items: ["Python (FastAPI, Django)", "Node.js (AdonisJS, Strapi)", "PHP 8.2 (Laravel)", "C# (.NET)", "SQLAlchemy", "REST APIs"],
   },
   {
     category: "Bases de Datos & Almacenamiento",
@@ -464,7 +464,7 @@ export const MOCK_SKILLS: SkillCategory[] = [
   },
   {
     category: "Frontend & Mobile",
-    items: ["React", "TypeScript", "Angular 11", "Flutter", "Tailwind CSS", "Bootstrap"],
+    items: ["React", "TypeScript", "Angular 16", "Flutter", "Tailwind CSS", "Bootstrap"],
   },
 ];
 
